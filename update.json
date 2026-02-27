@@ -1,0 +1,14 @@
+{
+  "latest": "1.0.1",
+  "files": [
+    {
+      "path": "launcher.py",
+      "url": "https://raw.githubusercontent.com/nono936/MyLauncherUpdate/main/launcher.py"
+    },
+    {
+      "path": "launcher_gui.py",
+      "url": "https://raw.githubusercontent.com/nono936/MyLauncherUpdate/main/launcher_gui.py"
+    }
+  ],
+  "notes": "自動更新啟用"
+}
