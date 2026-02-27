@@ -10,5 +10,5 @@
       "url": "https://raw.githubusercontent.com/nono936/MyLauncherUpdate/main/launcher_gui.py"
     }
   ],
-  "notes": "自動更新啟用"
+  "notes": "自動更新：啟動時提示 + 一鍵套用並重啟"
 }
