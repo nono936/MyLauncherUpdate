@@ -13,7 +13,7 @@ os.makedirs(ASSETS_DIR, exist_ok=True)
 os.makedirs(GAME_DIR, exist_ok=True)
 os.makedirs(NATIVES_DIR, exist_ok=True)
 
-APP_VERSION = "1.0.0"
+APP_VERSION = "1.0.1"
 UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/nono936/MyLauncherUpdate/main/update.json"
 
 # ---------------- UUID
@@ -148,3 +148,4 @@ def apply_update(data):
         full=os.path.join(BASE,path)
         os.makedirs(os.path.dirname(full),exist_ok=True)
         open(full,"wb").write(requests.get(url).content)
+
