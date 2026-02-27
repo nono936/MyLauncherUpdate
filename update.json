@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "launcher.py",
-      "url": "https://raw.githubusercontent.com/nono936/MyLauncherUpdate/main/launcher.py"
+      "url": "https://raw.githubusercontent.com/nono936/MyLauncherUpdate/refs/heads/main/launcher.py"
     },
     {
       "path": "launcher_gui.py",
@@ -12,6 +12,7 @@
   ],
   "notes": "test"
 }
+
 
 
 
