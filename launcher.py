@@ -13,7 +13,7 @@ os.makedirs(ASSETS_DIR, exist_ok=True)
 os.makedirs(GAME_DIR, exist_ok=True)
 os.makedirs(NATIVES_DIR, exist_ok=True)
 
-APP_VERSION = "1.0.1"
+APP_VERSION = "1.0.2"
 UPDATE_MANIFEST_URL = "https://raw.githubusercontent.com/nono936/MyLauncherUpdate/main/update.json"
 
 # ---------------- UUID
@@ -255,3 +255,4 @@ def apply_update(update_info: dict):
         return True, f"已更新到 {update_info.get('latest')}"
     except Exception as e:
         return False, f"套用更新失敗：{e}"
+
