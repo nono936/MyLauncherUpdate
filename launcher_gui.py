@@ -62,7 +62,6 @@ def apply_updates():
 
 tk.Button(root,text="啟動",command=start_game).pack(pady=5)
 tk.Button(root,text="一鍵清理",command=clean).pack(pady=5)
-tk.Button(root,text="檢查更新",command=check_updates).pack(pady=5)
-tk.Button(root,text="套用更新",command=apply_updates).pack(pady=5)
+
 
 root.mainloop()
