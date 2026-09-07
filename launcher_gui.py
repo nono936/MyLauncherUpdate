@@ -1,4 +1,3 @@
-
 # Copyright (C) 2026 nono936
 #
 # This program is free software: you can redistribute it and/or modify
@@ -19,11 +18,11 @@ from tkinter import ttk, messagebox
 import threading
 import os
 import sys
-import launcher
+import launcher_v6 as launcher
 
 root = tk.Tk()
-root.title("Minecraft Launcher")
-root.geometry("460x420")
+root.title("Minecraft Launcher V6")
+root.geometry("720x440")
 
 tk.Label(root, text="玩家名稱").pack(pady=5)
 name_var = tk.StringVar(value="Player")
@@ -46,6 +45,46 @@ ram_combo.pack()
 status = tk.StringVar(value="準備就緒")
 tk.Label(root, textvariable=status).pack(pady=8)
 
+progress_var = tk.DoubleVar(value=0)
+progress_bar = ttk.Progressbar(root, variable=progress_var, maximum=100, length=620)
+progress_bar.pack(pady=4)
+
+def _fmt_bytes(n):
+    n = float(n or 0)
+    for unit in ["B", "KB", "MB", "GB"]:
+        if n < 1024 or unit == "GB":
+            return f"{n:.1f} {unit}"
+        n /= 1024
+
+_last_gui_update = 0.0
+def download_progress(info):
+    global _last_gui_update
+    now = __import__("time").monotonic()
+    if now - _last_gui_update < 0.08 and info.get("phase") != "完成":
+        return
+    _last_gui_update = now
+
+    done = info.get("done_files", 0)
+    total = info.get("total_files", 0)
+    got = info.get("downloaded_bytes", 0)
+    total_b = info.get("total_bytes", 0)
+    speed = info.get("speed_bps", 0)
+    eta = info.get("eta_seconds")
+    cached = info.get("cached_files", 0)
+    pct = (done / total * 100) if total else 100
+
+    eta_text = "--" if eta is None else f"{eta:.0f}s"
+    text = (
+        f"{info.get('phase','下載')}  {done}/{total}（{pct:.1f}%） | "
+        f"{_fmt_bytes(got)}/{_fmt_bytes(total_b)} | "
+        f"{_fmt_bytes(speed)}/s | ETA {eta_text} | 快取 {cached}"
+    )
+
+    def update_ui():
+        progress_var.set(pct)
+        status.set(text)
+    root.after(0, update_ui)
+
 update_hint = tk.StringVar(value="更新：檢查中...")
 tk.Label(root, textvariable=update_hint).pack(pady=4)
 
@@ -62,17 +101,20 @@ def start_game():
 
             status.set("取得版本資訊...")
             root.update()
-
             vjson = launcher.get_version_json(v)
 
-            status.set("下載 client / libs / assets / natives...")
+            java_exe = launcher.find_java()
+            if not java_exe:
+                status.set("未偵測到 Java，正在準備內建 Runtime...")
+                launcher.download_embedded_java(vjson, download_progress)
+                java_exe = launcher.find_java()
+                if not java_exe:
+                    raise RuntimeError("Java Runtime 安裝失敗")
+
+            status.set("建立下載清單 / 檢查快取...")
             root.update()
 
-            launcher.download_client(v, vjson)
-            launcher.download_libraries(vjson)
-            launcher.download_asset_index(vjson)
-            launcher.download_assets(vjson)
-            launcher.download_natives(vjson)
+            launcher.download_all(v, vjson, download_progress)
 
             status.set("啟動中...")
             root.update()
@@ -80,7 +122,9 @@ def start_game():
             launcher.launch(v, vjson, p, r)
             status.set("完成")
         except Exception as e:
-            status.set(f"錯誤：{e}")
+            msg = str(e)
+            root.after(0, lambda: status.set(f"錯誤：{msg}"))
+            root.after(0, lambda: messagebox.showerror("Minecraft 下載失敗", msg))
 
     threading.Thread(target=run, daemon=True).start()
 
