@@ -1,21 +1,11 @@
 {
   "latest": "1.0.9",
+  "notes": "支援 EXE 自動更新與 SSL 憑證修正",
   "files": [
     {
-      "path": "launcher.py",
-      "url": "https://raw.githubusercontent.com/nono936/MyLauncherUpdate/refs/heads/main/launcher.py"
-    },
-    {
-      "path": "launcher_gui.py",
-      "url": "https://raw.githubusercontent.com/nono936/MyLauncherUpdate/refs/heads/main/launcher_gui.py"
+      "path": "MyMinecraftLauncher.exe",
+      "url": "你的 GitHub Release 新版 EXE 下載網址",
+      "sha256": "新版EXE的SHA256"
     }
-  ],
-  "notes": "test"
+  ]
 }
-
-
-
-
-
-
-
