@@ -1,15 +1,15 @@
 {
-  "latest": "1.0.9",
+  "latest": "1.0.8",
   "notes": "改用獨立 Updater.exe 更新架構，修正 EXE 自動更新及 SSL 憑證問題。",
   "files": [
     {
       "path": "MyMinecraftLauncher.exe",
-      "url": "https://github.com/nono936/MyLauncherUpdate/releases/download/v1.0.10/MyMinecraftLauncher.exe",
+      "url": "https://github.com/nono936/MyLauncherUpdate/releases/download/v1.0.8/MyMinecraftLauncher.exe",
       "sha256": "C74CC7D416DD4BD5F134C57BAE56D1E0FDF5E3DD63CA723E23B380C2B9C8D3E2"
     },
     {
       "path": "Updater.exe",
-      "url": "https://github.com/nono936/MyLauncherUpdate/releases/download/v1.0.10/Updater.exe",
+      "url": "https://github.com/nono936/MyLauncherUpdate/releases/download/v1.0.8/Updater.exe",
       "sha256": "BE9B1D1135E486D7EF26D5E29C0C9B2016B9D1CA203EB0746E71B6854E69EE0F"
     }
   ]
