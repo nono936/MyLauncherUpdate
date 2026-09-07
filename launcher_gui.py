@@ -18,7 +18,7 @@ from tkinter import ttk, messagebox
 import threading
 import os
 import sys
-import launcher_v6 as launcher
+import launcher as launcher
 
 root = tk.Tk()
 root.title("Minecraft Launcher V6")
