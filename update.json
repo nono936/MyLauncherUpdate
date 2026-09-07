@@ -1,5 +1,5 @@
 {
-  "latest": "1.0.9",
+  "latest": "1.0.10",
   "notes": "支援 EXE 自動更新與 SSL 憑證修正",
   "files": [
     {
